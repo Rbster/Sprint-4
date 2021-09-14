@@ -2,7 +2,6 @@ class ValidationException(val errorCode: Array<ErrorCode>) : RuntimeException(er
 
 enum class ErrorCode(val code: Int, val msg: String) {
     INVALID_CHARACTER(1, "Недопустимый символ"),
-    // ...
     TOO_MANY_CHARACTERS(2, "Слишком много символов"),
     TOO_FEW_CHARACTERS(4, "Слишком мало символов"),
     WRONG_EMAIL_FORMAT(8, "Неверный формат почты"),

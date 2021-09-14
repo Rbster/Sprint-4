@@ -20,8 +20,8 @@ class PhoneValidator : Validator<String>() {
                 result.add(ErrorCode.TOO_FEW_CHARACTERS)
             }
             if (value.isEmpty() ||
-                value[0] != '8' ||
-                value[0] != '7') {
+                ((value[0] != '8') ==
+                (value[0] != '7'))) {
 
                 result.add(ErrorCode.WRONG_PHONE_FORMAT)
             }
@@ -61,7 +61,7 @@ class MailValidator : Validator<String>() {
         val maxRequiredLength = 32
         val pattern = Pattern.compile(
             "[a-zA-Z]+" +
-                "\\@" +
+                "@" +
                 "[a-zA-Z]+" +
                 "(\\." +
                 "[a-zA-Z]+" +
@@ -96,6 +96,9 @@ class SnilsValidator : Validator<String>() {
         val trueControlNumber = "${snils[9]}${snils[10]}".toIntOrNull()
         var thisControlNumber = 0
         var thisDigit: Int?
+        if (snils.slice(0..8) < "001001998") {
+            return false
+        }
         for (i in 0..8) {
             thisDigit = snils[i].digitToIntOrNull()
             if (thisDigit != null) {
@@ -108,7 +111,7 @@ class SnilsValidator : Validator<String>() {
             if (thisControlNumber > 101) {
                 return trueControlNumber == thisControlNumber % 101
             } else if (thisControlNumber > 99) {
-                return trueControlNumber == 100
+                return trueControlNumber == 0
             } else {
                 return trueControlNumber == thisControlNumber
             }
