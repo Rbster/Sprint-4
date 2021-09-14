@@ -5,6 +5,8 @@ enum class ErrorCode(val code: Int, val msg: String) {
     // ...
     TOO_MANY_CHARACTERS(2, "Слишком много символов"),
     TOO_FEW_CHARACTERS(4, "Слишком мало символов"),
-    WRONG_FORMAT(8, "Неверный формат данных"),
-    MISSING_DATA(16, "Данные не найдены")
+    WRONG_EMAIL_FORMAT(8, "Неверный формат почты"),
+    WRONG_PHONE_FORMAT(16, "Неверный формат номера телефона"),
+    BAD_SNILS_CONTROL_NUM(32, "Контрольный номер СНИЛС не совпадает"),
+    MISSING_DATA(64, "Данные не найдены")
 }
