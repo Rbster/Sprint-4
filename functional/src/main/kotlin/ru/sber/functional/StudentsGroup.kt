@@ -2,30 +2,28 @@ package ru.sber.functional
 
 import java.util.function.Predicate
 
-class StudentsGroup {
+class StudentsGroup(names: List<String> = listOf("Alex", "Sergey", "Arnold", "Lucas", "Rachel", "Donald"),
+                    surNames: List<String> = listOf("Trump", "Donahue", "Andropov", "Parker", "Hegel", "Rasputin"),
+                    averageRates: List<Double> = listOf(0.5, 2.6, 3.6, 4.7, 2.7, 3.1)) {
 
-    var students: List<Student> = init()
+    val students: List<Student> = mutableListOf()
 
-    fun filterByPredicate(predicate: (x: Student) -> Boolean): List<Student> {
-        val result = mutableListOf<Student>()
-        for (student in students) {
-            if (predicate(student)) {
-                result.add(student)
-            }
+    fun filterByPredicate(predicate: (x: Student) -> Boolean): List<Student> = students
+        .asSequence()
+        .filter(predicate)
+        .toList()
+
+
+    init {
+        for (i in names.indices) {
+            (students as MutableList<Student>).add(Student(firstName = names[i],
+                lastName = surNames[i],
+                averageRate = averageRates[i],
+                middleName = "",
+                age = 0,
+                city = "",
+                specialization = "",
+                prevEducation = ""))
         }
-        return result
-    }
-
-    fun init(): List<Student> {
-        val names = listOf("Alex", "Sergey", "Arnold", "Lucas", "Rachel", "Donald")
-        val surNames = listOf("Trump", "Donahue", "Andropov", "Parker", "Hegel", "Rasputin")
-        return listOf(Student(names[0], surNames[0], "", 0,4.3,"","",""),
-            Student(names[1], surNames[1], "", 0,4.3,"","",""),
-            Student(names[2], surNames[2], "", 0,5.0,"","",""),
-            Student(names[3], surNames[3], "", 0,1.4,"","",""),
-            Student(names[4], surNames[4], "", 0,3.6,"","",""),
-            Student(names[5], surNames[5], "", 0,2.1,"","",""),
-        )
-
     }
 }
