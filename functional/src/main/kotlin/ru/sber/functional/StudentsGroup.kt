@@ -1,8 +1,13 @@
 package ru.sber.functional
 
-class StudentsGroup(names: List<String> = listOf("Alex", "Sergey", "Arnold", "Lucas", "Rachel", "Donald"),
-                    surNames: List<String> = listOf("Trump", "Donahue", "Andropov", "Parker", "Hegel", "Rasputin"),
-                    averageRates: List<Double> = listOf(0.5, 2.6, 3.6, 4.7, 2.7, 3.1)) {
+class StudentsGroup(names: List<String>,
+                    surNames: List<String>,
+                    averageRates: List<Double>,
+                    middleNames: List<String> = List(names.size) { "" },
+                    ages: List<Int> = List(names.size) { 0 },
+                    cities: List<String> = List(names.size) { "" },
+                    specializations: List<String> = List(names.size) { "" },
+                    prevEducations: List<String> = List(names.size) { "" }) {
 
     val students: List<Student> = mutableListOf()
 
@@ -17,11 +22,11 @@ class StudentsGroup(names: List<String> = listOf("Alex", "Sergey", "Arnold", "Lu
             (students as MutableList<Student>).add(Student(firstName = names[i],
                 lastName = surNames[i],
                 averageRate = averageRates[i],
-                middleName = "",
-                age = 0,
-                city = "",
-                specialization = "",
-                prevEducation = ""))
+                middleName = middleNames[i],
+                age = ages[i],
+                city = cities[i],
+                specialization = specializations[i],
+                prevEducation = prevEducations[i]))
         }
     }
 }
